@@ -1,0 +1,76 @@
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Home - WASHING-TON Laundry Management Software</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            background: linear-gradient(to right, #ff7e5f, #feb47b);
+            color: #fff;
+        }
+
+        .navbar {
+            background-color: #333;
+            overflow: hidden;
+        }
+
+        .navbar a {
+            float: left;
+            display: block;
+            color: #f2f2f2;
+            text-align: center;
+            padding: 14px 20px;
+            text-decoration: none;
+        }
+
+        .navbar a:hover {
+            background-color: #ddd;
+            color: black;
+        }
+
+        .footer {
+            background-color: #ff7e5f;
+            text-align: center;
+            padding: 10px 0;
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar a:hover">
+        <form action="/home" method="post" style="display: inline;">
+            <button type="submit" style="background-color: #333; color: #f2f2f2; border: none; padding: 14px 20px; text-align: center; text-decoration: none; display: inline-block;">Home</button>
+        </form>
+        <form action="/bag" method="post" style="display: inline;">
+            <button type="submit" style="background-color: #333; color: #f2f2f2; border: none; padding: 14px 20px; text-align: center; text-decoration: none; display: inline-block;">Bag</button>
+        </form>
+        <form action="/history" method="post" style="display: inline;">
+            <button type="submit" style="background-color: #333; color: #f2f2f2; border: none; padding: 14px 20px; text-align: center; text-decoration: none; display: inline-block;">History</button>
+        </form>
+    </div>
+
+    <div style="flex: 1; display: flex; flex-direction: column; align-items: center; padding: 20px;">
+        <h1 style="font-size: 2.5em;">Welcome to WASHING-TON</h1>
+        <img src="laundry_management_image.jpg" alt="Laundry Management" style="width: 50%; max-width: 400px; margin: 20px 0;">
+        <!-- Your home content goes here -->
+        <p>Student Details:</p>
+        <ul>
+            <li>Username: {{ student[0] }}</li>
+            <li>Email: {{ student[1] }}</li>
+            <!-- Add more details as needed -->
+        </ul>
+    </div>
+
+    <div class="footer">
+        <p>About Us - WASHING-TON is a comprehensive laundry management software designed to streamline and optimize laundry operations.</p>
+        <p>© 2023 WASHING-TON. All rights reserved.</p>
+    </div>
+</body>
+</html>
