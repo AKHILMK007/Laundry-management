@@ -1,0 +1,246 @@
+<!-- 
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Home - WASHING-TON Laundry Management Software</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            background: linear-gradient(to right, #ff7e5f, #feb47b);
+            color: #fff;
+        }
+
+        .navbar {
+            background-color: #333;
+            overflow: hidden;
+        }
+
+        .navbar a {
+            float: left;
+            display: block;
+            color: #f2f2f2;
+            text-align: center;
+            padding: 14px 20px;
+            text-decoration: none;
+        }
+
+        .navbar a:hover {
+            background-color: #ddd;
+            color: black;
+        }
+
+        .footer {
+            background-color: #ff7e5f;
+            text-align: center;
+            padding: 10px 0;
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar a:hover">
+        <div class="navbar">
+            <a href="/bag">Bag</a>
+            <a href="/joined_entries">History</a>
+        </div>
+    </div>
+
+    <div style="flex: 1; display: flex; flex-direction: column; align-items: center; padding: 20px;">
+        <h1 style="font-size: 2.5em;">Welcome to WASHING-TON</h1>
+        <img src="{{ url_for('static', filename='1kst.gif') }}" alt="Laundry Management" style="width: 50%; max-width: 400px; margin: 20px 0;">
+
+        <p>Student Details:</p>
+        <ul>
+            <li>Username: {{ student[0] }}</li>
+            <li>Email: {{ student[1] }}</li>
+
+        </ul>
+    </div>
+
+    <div class="footer">
+        <p>About Us - WASHING-TON is a comprehensive laundry management software designed to streamline and optimize laundry operations.</p>
+        <p>© 2023 WASHING-TON. All rights reserved.</p>
+    </div>
+</body>
+</html> -->
+
+
+
+<!DOCTYPE html>
+ <html lang="en">
+            <head>
+                <title>Home - WASHING-TON Laundry Management Software</title>
+                <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(to right, #e09257, #e78637); /* Greenish-Blue Gradient */
+        }
+            
+                    .navbar {
+                        background-color: #24292e;
+                        overflow: hidden;
+                    }
+            
+                    .navbar a {
+                        float: left;
+                        display: block;
+                        color: #f2f2f2;
+                        text-align: center;
+                        padding: 14px 20px;
+                        text-decoration: none;
+                    }
+            
+                    .navbar a:hover {
+                        background-color: #ddd;
+                        color: black;
+                    }
+            
+                    .header {
+                        text-align: center;
+                        padding: 40px 20px;
+                        background-color: linear-gradient(to right, #e09257, #e78637);
+                        border-bottom: 1px solid #ddd;
+                    }
+            
+                    .header h1 {
+                        font-size: 2.5em;
+                        margin-bottom: 10px;
+                        color: #0c1621;
+                    }
+            
+                    .header img {
+                        width: 50%;
+                        max-width: 400px;
+                        margin: 20px 0;
+                        border-radius: 8px;
+                        animation: floatAnimation 3s infinite alternate;
+                    }
+            
+                    .details-container {
+                        background:linear-gradient(to right, #c8bcb2, #d58b4a);
+                        border-radius: 8px;
+                        padding: 20px;
+                        margin: 20px;
+                        text-align: left;
+                        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+                    }
+            
+                    .details-container p {
+                        margin: 10px 0;
+                        animation: moveText 3s infinite alternate;
+                    }
+            
+                    .company-info {
+            flex: 1;
+            background:linear-gradient(to right, #c8bcb2, #d58b4a);
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px;
+            text-align: left;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+            
+                    .company-info h2 {
+                        font-size: 1.5em;
+                        color: #121921;
+                    }
+            
+                    .company-info p {
+                        margin: 10px 0;
+                    }
+            
+                    .gallery {
+            flex: 1;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            margin: 20px;
+        }
+
+        .gallery img {
+            width: 100%;
+            max-width: 400px;
+            border-radius: 8px;
+            margin-bottom: 10px;
+        }
+            
+                    .footer {
+                        background-color: #24292e;
+                        text-align: center;
+                        padding: 10px 0;
+                        color: #f2f2f2;
+                    }
+            
+                    @keyframes floatAnimation {
+                        0% {
+                            transform: translateY(0);
+                        }
+                        100% {
+                            transform: translateY(-10px);
+                        }
+                    }
+            
+                    @keyframes moveText {
+                        0% {
+                            transform: translateX(0);
+                        }
+                        100% {
+                            transform: translateX(5px);
+                        }
+                    }
+
+                    .content-container {
+                          display: flex;
+                          flex-wrap: wrap;
+                        justify-content: space-between;
+        }
+                </style>
+            </head>
+            <body>
+                <div class="navbar">
+                    <a href="/bag">Bag</a>
+                    <a href="/joined_entries">History</a>
+                </div>
+            
+                <div class="header">
+                    <img src="{{ url_for('static', filename='vecteezy_washing-machine-ai-generative_28635534.png') }}" alt="Laundry Management">
+                    <h1>Welcome to WASHING-TON</h1>
+                    <div class="details-container">
+                        <p>Username: {{ student[0] }}</p>
+                        <p>Email: {{ student[1] }}</p>
+                    </div>
+                </div>
+                <div class="content-container">
+                <div class="company-info">
+                    <h2>Our Company</h2>
+                    <p>
+                        Introducing "LaundryCare Solutions," your go-to partner for hassle-free laundry management at PES University Boys Hostel.
+                        We understand that a student's life is dynamic and demanding, leaving little time for laundry chores. 
+                        That's where we step in, offering a seamless and efficient laundry experience tailored to the unique needs of the vibrant community at PES University.
+                        Our state-of-the-art facilities boast cutting-edge technology, ensuring your garments receive the utmost care while being handled by our skilled professionals.
+                        At LaundryCare Solutions, we prioritize convenience, offering a user-friendly app that allows you to schedule pickups, track your laundry, and receive timely notifications.
+                        With our commitment to quality, reliability, and affordability, LaundryCare Solutions is not just a service but a lifestyle enhancement, making laundry day a breeze for the PES University Boys Hostel community.
+                        Experience the epitome of laundry excellence with us!</p> 
+                </div>
+            
+                <div class="gallery">
+                    <img src="{{ url_for('static', filename='laundry_1.jpeg') }}" alt="Laundry Image 1">
+                    <img src="{{ url_for('static', filename='laundry_2.jpeg') }}" alt="Laundry Image 2">
+                </div>
+            </div>
+            
+                <div class="footer">
+                    <p>About Us - WASHING-TON is a comprehensive laundry management software designed to streamline and optimize laundry operations.</p>
+                    <p>© 2023 WASHING-TON. All rights reserved.</p>
+                </div>
+            </body>
+            </html>
+            

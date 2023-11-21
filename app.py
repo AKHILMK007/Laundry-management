@@ -1,96 +1,96 @@
-
-from flask import Flask, render_template, request,redirect
+from flask import Flask, render_template,request
 import mysql.connector
-
+from datetime import date
 app = Flask(__name__)
 
+# MySQL configuration
 mydb = mysql.connector.connect(
-  host="localhost",
-  user="student",
-  password="123",
-  database="laundry"
+    host="localhost",
+    user="employee",
+    password="111",
+    database="laundry"
 )
 
 @app.route('/')
-def index():
-    return render_template('index.html')
+def home():
+    cursor = mydb.cursor()
+    cursor.execute("SELECT * FROM laundry")
+    data = cursor.fetchall()
+    return render_template('home.html', data=data)
 
-@app.route('/login', methods=['GET', 'POST'])
-def login():
+
+
+
+@app.route('/clothes_count')
+def clothes_count():
+    sql = """
+        SELECT cbag_id, COUNT(*) as clothes_count
+        FROM clothes
+        WHERE cbag_id IN (
+            SELECT bag_id FROM laundry WHERE o_status != 'complete'
+        )
+        GROUP BY cbag_id
+    """
+    
+    mycursor = mydb.cursor()
+    mycursor.execute(sql)
+    results = mycursor.fetchall()
+
+    return render_template('clothes_count.html', results=results)
+
+
+
+mycursor = mydb.cursor()
+@app.route('/update_status', methods=['GET', 'POST'])
+def update_status():
     if request.method == 'POST':
-        username = request.form['username']
-        password = request.form['password']
-        mycursor = mydb.cursor()
-        mycursor.execute(f"SELECT * FROM login_cred WHERE username = '{username}' and password = '{password}'")
-       # myresult = mycursor.fetchall()
-        student_details = mycursor.fetchall()
-        if student_details:
-            return render_template('home.html', student=student_details[0])
-        return render_template('login.html')
-    return render_template('login.html')
+        bag_id = request.form['bag_id']
+        o_status = request.form['o_status']
+
+        # Update o_status in the laundry table
+        # update_sql = "UPDATE laundry SET o_status = %s WHERE bag_id = %s"
+        # mycursor.execute(update_sql, (o_status, int(bag_id)))
+       # today_date = date.today()
+        # Update o_status in the laundry table for rows where bag_id matches and date is less than today
+       # update_sql = "UPDATE laundry SET o_status = %s WHERE bag_id = %s AND date < %s"
+       # mycursor.execute(update_sql, (o_status, int(bag_id), today_date))
+       # mydb.commit()
+        mycrsor = mydb.cursor()
+        update_sql = "CALL update_status_and_clothes_v2(%s, %s)"
+        mycrsor.execute(update_sql, (int(bag_id), o_status))
+        mydb.commit()
+        return "Status updated successfully!"
+
+    return render_template('update_status.html')
 
 
 
-        # if myresult:
-        #     return redirect('/home')
-        # else:
-        #     return render_template('login.html')
-        # return f'Logged in as {username}'
-    # return render_template('login.html')
 
-@app.route('/signup', methods=['GET', 'POST'])
-def signup():
+
+@app.route('/add_student', methods=['GET', 'POST'])
+def add_student():
     if request.method == 'POST':
-        username = request.form['username']
-        password = request.form['password']
+        srn = request.form['srn']
+        name = request.form['name']
+        phone = request.form['phone']
         email = request.form['email']
+        hostel_block = request.form['hostel_block']
+        room_number = request.form['room_number']
 
-        mycursor = mydb.cursor()
-        sql = "INSERT INTO login_cred (username, email, password) VALUES (%s, %s, %s)"
-        val = (username, email, password)
-        mycursor.execute(sql, val)
+        # Insert student details into the student table
+        insert_sql = "INSERT INTO student (SRN, Name, phone, email, hostel_block, room_number) VALUES (%s, %s, %s, %s, %s, %s)"
+        mycursor.execute(insert_sql, (srn, name, phone, email, hostel_block, room_number))
         mydb.commit()
 
-        return redirect('/home')
+        return render_template('add_student.html')
 
-    return render_template('signup.html')
+    return render_template('add_student.html')
 
-@app.route('/redirect_login', methods=['GET', 'POST'])
-def redirect_login():
-    return redirect('/login')
-
-@app.route('/redirect_signup', methods=['GET', 'POST'])
-def redirect_signup():
-    return redirect('/signup')
-
-@app.route('/home')
-def home():
-    return render_template('home.html')
-
-@app.route('/bag', methods=['GET', 'POST'])
-def handle_bag():
-    if request.method == 'POST':
-        # Handle the 'Bag' button click
-        # Add your logic here
-        return render_template('bag.html')
-    else:
-        return render_template('home.html')  # Update to the appropriate template for 'bag'
-
-@app.route('/history', methods=['GET', 'POST'])
-def handle_history():
-    if request.method == 'POST':
-        # Handle the 'History' button click
-        # Add your logic here
-        return render_template('history.html')
-    else:
-        return render_template('home.html')  # Update to the appropriate template for 'history'
-
-if __name__ == '__main__':
-    app.run(debug=True)
 
 
 
 
 if __name__ == '__main__':
     app.run(debug=True)
-
+    mycursor.close()
+    mydb.close()

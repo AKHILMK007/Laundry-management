@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home - WASHING-TON Laundry Management Software</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            background: linear-gradient(to right, #e09257, #e78637);
+            color: #fff;
+        }
+
+        .navbar {
+            background-color: #333;
+            overflow: hidden;
+        }
+
+        .navbar a {
+            float: left;
+            display: block;
+            color: #f2f2f2;
+            text-align: center;
+            padding: 14px 20px;
+            text-decoration: none;
+            transition: background-color 0.3s;
+        }
+
+        .navbar a:hover {
+            background-color: #ddd;
+            color: black;
+        }
+
+        .container {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+        }
+
+        h1 {
+            font-size: 2.5em;
+            margin-bottom: 20px;
+        }
+
+        .content {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            align-items: flex-start;
+        }
+
+        img {
+            width: 30%;
+            max-width: 400px;
+            margin: 20px 0;
+            border-radius: 8px;
+        }
+
+        form {
+            width: 40%; /* Adjust the width as needed */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        label {
+            margin-bottom: 8px;
+        }
+
+        input, button {
+            padding: 10px;
+            margin: 8px 0;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+            width: 100%;
+            font-size: 1em;
+        }
+
+        button {
+            background-color: #333;
+            color: #fff;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #555;
+        }
+
+        h2 {
+            margin-top: 20px;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        li {
+            margin-bottom: 8px;
+        }
+        .bag_contents{
+            background:linear-gradient(to right, #ede4dc81, #e6e1dd7b);
+                        border-radius: 10px;
+                        padding: 20px;
+                        margin: 30px;
+                        text-align: left;
+                        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .footer {
+            background-color: #ff7e5f;
+            text-align: center;
+            padding: 10px 0;
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <a href="/bag">Bag</a>
+        <a href="/joined_entries">History</a>
+    </div>
+
+    <div class="container">
+        <h1>Your BAG</h1>
+        <div class="content">
+            <img src="{{ url_for('static', filename='vecteezy_bucket-clipart-design-illustration_9342677.png') }}" alt="Laundry Management">
+    
+            <form action="/add_to_bag" method="post">
+                <label for="cloth_type">Cloth Type:</label>
+                <input type="text" id="cloth_type" name="cloth_type" required>
+    
+                <label for="count">Count:</label>
+                <input type="number" id="count" name="count" required>
+    
+                <button type="submit">Add to Bag</button>
+            </form>
+        </div>
+
+        <h2>Bag Contents:</h2>
+        <ul class="bag_contents">
+            {% for item in bag %}
+                <li>{{ item['count'] }} {{ item['cloth_type'] }}</li>
+            {% endfor %}
+        </ul>
+
+        <form action="/submit_bag" method="post">
+            <button type="submit">Submit Bag</button>
+        </form>
+    </div>
+
+    <div class="footer">
+        <p>About Us - WASHING-TON is a comprehensive laundry management software designed to streamline and optimize laundry operations.</p>
+        <p>© 2023 WASHING-TON. All rights reserved.</p>
+    </div>
+</body>
+</html>
